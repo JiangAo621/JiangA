@@ -48,7 +48,7 @@ int main()
 	     	if (numA != 3) {cout << "Sorry.You fail to get the numbers in 7 times.The answer is" << num1 << num2 << num3 << endl; ++ lose; }
 			                                                                                    //if the user can't get the answer in 7 times,display the answer
         }
-		else {cout << "You have already played" << i-2 << "times.WIN for" << win << "times and LOSE for" << lose << "times."; break;} 
+		else {cout << "You have already played " << i-2 << " times.WIN for " << win << " times and LOSE for " << lose << " times."; break;} 
 		                                                                                        //if the user wants to quit the game,display the information.
         
 	
