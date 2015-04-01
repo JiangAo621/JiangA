@@ -36,11 +36,11 @@ int main()
 			 {
 	  		 cout << "Pleae input your guess:" ;                                      //get the numbers users guess
         		 cin >> guess1 >> guess2 >> guess3; 
-        
+        	
          	 	numA = ( (num1 == guess1) + (num2 == guess2) + (num3 == guess3) );      
-        	 	numB = ( (num1 == guess2) ||  (num1 == guess3) + 
-		        	 (num2 == guess1) || (num2 == guess3) +
-				 (num3 == guess1) || (num3 == guess2) );
+        	 	numB = (((num1 == guess2) && (num1 != guess1)) + ((num1 == guess3) && (num1 != guess1))+
+			        ((num2 == guess1) && (num2 != guess2)) + ((num2 == guess3) && (num2 != guess2))+
+				((num3 == guess1) && (num3 != guess3)) + ((num3 == guess2) && (num3 != guess3)));
 	    
 	    		 if (numA == 3)	{cout << "Congratulations,you win!" << endl; ++ win; break;}        //if win,break the circulation.win plus 1.
 			 	else cout << numA << "A" << numB << "B" << endl;                                   //if fail the match,display the hint.
