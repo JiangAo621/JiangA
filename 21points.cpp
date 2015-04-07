@@ -13,57 +13,58 @@ void ShowCards(int hand[26], int amount);                                       
 char InputCheck();                                                                  //简单的输入检验
 
 int main(){
-	char inp;                                                                               //inp:用户键盘输入
-	int Cards[52], hand_user[26], hand_computer[26], a_u[1], a_c[1], size = 0;              //Cards:一副扑克牌  hand_user\computer:用户\电脑手中的牌
-	float user[1], computer[1];                                                             //a_c\u:用户\电脑手中牌的数目
-	                                                                                        //user\computer:用户\电脑所得牌牌面数字之和
-	                                                                                        //size:发牌数 
-	 
-	srand(time(NULL));                                                                      //设置随机数种子
-	 
-	InitialCards(Cards, hand_user, user, a_u);                                              //初始化用户和电脑
-	InitialCards(Cards, hand_computer, computer, a_c);
-	
-	cout << "Do you want to play the game 21 points?(y/n)";                                 //询问用户意愿
-	if(InputCheck() == 'n') exit(0);                                                        //输入检验
-	
-	cout << "\nStage of User...";                                                           //用户阶段
-	cout << "\nYou get the cards:";
-	DealCards(Cards, hand_user, user, 2, a_u);                                              //随机派发给用户两张牌
-
-	while (user[0] <= 21){                                                                  
-		cout << "\nDo you want another card?(y/n)";                                     //询问用户意愿：是否需要加牌
-		if (InputCheck() == 'n') break;                                                 //输入检验
+	while( true ){ 
 		
-		cout << "You get another card:";
-		DealCards(Cards, hand_user, user, 1, a_u);	                                //随机派发给用户一张牌
-	}
-	if (user[0] > 21) {cout << "\nComputer win!"; exit(0);}                                 
+		char inp;                                                                                       //inp:用户键盘输入
+		int Cards[52], hand_user[26], hand_computer[26], a_u[1], a_c[1], size = 0;                      //Cards:一副扑克牌  hand_user\computer:用户\电脑手中的牌
+		float user[1], computer[1];                                                                     //a_c\u:用户\电脑手中牌的数目
+	                                                                                                //user\computer:用户\电脑所得牌牌面数字之和
+	                                                                                                //size:发牌数
+	                                                                                  
+		srand(time(NULL));                                                                      //设置随机数种子
+	 
+		InitialCards(Cards, hand_user, user, a_u);                                              //初始化用户和电脑
+		InitialCards(Cards, hand_computer, computer, a_c);
+	
+		cout << "\n\nDo you want to play the game 21 points?(y/n)";                              //询问用户意愿
+		if(InputCheck() == 'n') break;                                                           //输入检验
+	
+		cout << "\nStage of User...";                                                            //用户阶段
+		cout << "\nYou get the cards:";
+		DealCards(Cards, hand_user, user, 2, a_u);                                               //随机派发给用户两张牌
+
+		while (user[0] <= 21){                                                                  
+			cout << "\nDo you want another card?(y/n)";                                      //询问用户意愿：是否需要加牌
+			if (InputCheck() == 'n') break;                                                  //输入检验
+		
+			cout << "You get another card:";
+			DealCards(Cards, hand_user, user, 1, a_u);	                                 //随机派发给用户一张牌
+		}
+	    if (user[0] > 21) {cout << "\nComputer win!"; continue;}                                 
 	
 
-    cout << "\nStage of Computer...";                                                           //电脑阶段
+    	cout << "\nStage of Computer...";                                                                //电脑阶段
      
-    cout << "\nComputer gets the cards:";
-    DealCards(Cards, hand_computer, computer, 2, a_c);                                          //随机派发给电脑两张牌
+    	cout << "\nComputer gets the cards:";
+    	DealCards(Cards, hand_computer, computer, 2, a_c);                                              //随机派发给电脑两张牌
     
-    while(a_c[0] < a_u[0] || (a_c[0] == a_u[0] && computer[0] < user[0])){                      //在电脑牌数小于用户牌数或者电脑和用户牌数相当但电脑牌之和小于用户牌之和
-    	cout << "\nComputer gets another card:";                                                //的情况下,默认电脑要牌，随机发给电脑一张牌
-    	DealCards(Cards, hand_computer, computer, 1, a_c);
-	}
-	if (computer[0] > 21) {cout << "\nYou win!"; exit(0);}                                  //判断阶段：
-	if (user[0] == computer[0]) {                                                           //赢的一方是点数较大的一方，若点数相同，则取牌数量更多的一方胜，若牌数也一样，则不分胜负
-		if (a_u[0] == a_c[0]) cout << "\nYou and Computer both win!";
-		else{
-				if (a_u[0] > a_c[0]) cout << "\nComputer win!"; 
-				else cout << "\nYou win!"; 
+    	while(computer[0] <= user[0]){                                                                  //电脑牌之和小于用户牌之和
+    		cout << "\nComputer gets another card:";                                                //的情况下,默认电脑要牌，随机发给电脑一张牌
+    		DealCards(Cards, hand_computer, computer, 1, a_c);
+		}
+		if (computer[0] > 21) {cout << "\nYou win!"; continue;}                                 //判断阶段：
+		if (user[0] == computer[0]) {                                                           //赢的一方是点数较大的一方，若点数相同，则取牌数量更多的一方胜，若牌数也一样，则不分胜负
+			if (a_u[0] == a_c[0]) cout << "\nYou and Computer both win!";
+			else{
+					if (a_u[0] > a_c[0]) cout << "\nComputer win!"; 
+					else cout << "\nYou win!"; 
 		   	}
 		}
-	else {
-	    if (user[0] > computer[0]) cout << "\nYou win!"; 
-		else cout << "\nComputer win!"; 	
-	}
-
-
+		else {
+	    	if (user[0] > computer[0]) cout << "\nYou win!"; 
+			else cout << "\nComputer win!"; 	
+		}
+    }
 return 0;
 	
 }
