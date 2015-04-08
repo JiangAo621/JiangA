@@ -48,25 +48,23 @@ int main(){
     	cout << "\nStage of Computer...";                                                                //电脑阶段
      
     	cout << "\nComputer gets the cards:";
-    	DealCards(Cards, hand_computer, computer, 2, a_c);                                              //随机派发给电脑两张牌
+    	DealCards(Cards, hand_computer, computer, 2, a_c);                                               //随机派发给电脑两张牌
     
-    	while(computer[0] < user[0]){                                                                  //电脑牌之和小于用户牌之和
-    		cout << "\nComputer gets another card:";                                                //的情况下,默认电脑要牌，随机发给电脑一张牌
+    	while(computer[0] < user[0]){                                                                    //电脑牌之和小于用户牌之和
+    		cout << "\nComputer gets another card:";                                                 //的情况下,默认电脑要牌，随机发给电脑一张牌
     		DealCards(Cards, hand_computer, computer, 1, a_c);
 		}
 		if (computer[0] > 21) {cout << "\nsum:" << computer[0]; cout << "\nYou win!"; continue;}                                 //判断阶段：
-		if (user[0] == computer[0]) {                                                           //赢的一方是点数较大的一方，若点数相同，则取牌数量更多的一方胜，若牌数也一样，则不分胜负
+		if (user[0] == computer[0]) {                                                            //赢的一方是点数较大的一方，若点数相同，则取牌数量更多的一方胜，若牌数也一样，则不分胜负
 			if (a_u[0] == a_c[0]) {cout << "\nsum:" << computer[0];cout << "\nYou and Computer both win!";}
 			else{
 					if (a_u[0] > a_c[0]) {cout << "\nsum:" << computer[0]; cout << "\nComputer win!";}
 					else {cout << "\nsum:" << computer[0]; cout << "\nYou win!";} 
 		   	}
 		}
-		else {
-	    	if (user[0] > computer[0]) {cout << "\nsum:" << computer[0]; cout << "\nYou win!";}
-			else {cout << "\nsum:" << computer[0]; cout << "\nComputer win!";} 	
+	    	else {cout << "\nsum:" << computer[0]; cout << "\nComputer win!";}
 		}
-    }
+    
 return 0;
 	
 }
