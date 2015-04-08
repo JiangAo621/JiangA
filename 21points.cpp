@@ -48,7 +48,7 @@ int main(){
     	cout << "\nComputer gets the cards:";
     	DealCards(Cards, hand_computer, computer, 2, a_c);                                              //随机派发给电脑两张牌
     
-    	while(computer[0] <= user[0]){                                                                  //电脑牌之和小于用户牌之和
+    	while(computer[0] < user[0]){                                                                  //电脑牌之和小于用户牌之和
     		cout << "\nComputer gets another card:";                                                //的情况下,默认电脑要牌，随机发给电脑一张牌
     		DealCards(Cards, hand_computer, computer, 1, a_c);
 		}
@@ -74,8 +74,8 @@ void InitialCards(int Cards[52], int hand[52], float stage[1], int a[1]){       
 	int j;                                                                                 //j:循环变量
 	for (j = 0; j < 52; ++j) Cards[j] = 0;
 	for (j = 0; j < 52; ++j) hand[j] = 0 ;
-	for (j = 0; j < 1 ; ++j) stage[j] = 0;
-	for (j = 0; j < 1 ; ++j) a[j] = 0;
+	stage[0] = 0;
+	a[0] = 0;
 }
 
 void DealCards(int Cards[52], int hand[26], float stage[1], int size, int a[1]){               //发牌
@@ -116,12 +116,12 @@ void ShowCards(int hand[26], int amount){                                       
 
 
 char InputCheck(){                                                                               //简单的输入检验
-	   char inp;
+	   char inp[40];
 	   
 	   while(true){
-	   	cin >> inp;
+	   	cin.getline(inp, 40);
 		try{
-			if (inp != 'y' && inp != 'n') throw 1;
+			if (inp[0] != 'y' && inp[0] != 'n' || inp[1] != '\0') throw 1;
 			else throw 'a';
 		}
 		catch (int){
@@ -132,8 +132,7 @@ char InputCheck(){                                                              
 		}
        }
        
-return inp;
+return inp[0];
 
 }
-
 
